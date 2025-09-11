@@ -2,6 +2,10 @@ package com.desafio.CRUD.clientes.dto;
 
 import com.desafio.CRUD.clientes.entities.Client;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
@@ -10,14 +14,24 @@ public class ClientDTO {
 
     private long id;
 
+    @Size(min = 3, max = 80, message = "Nome precisa ter de 3 a 80 caracteres")
+    @NotBlank(message = "Campo nome requerido")
     private String name;
 
+
+    @NotBlank(message = "Campo CPF requerido")
+    @CPF(message = "CPF inválido")
     private String cpf;
 
+    @NotBlank(message = "Campo income requerido")
     private Double income;
 
+    @PastOrPresent
+    @NotBlank(message = "Campo requerido")
     private LocalDate birthDate;
 
+    @Size(min = 0, message = "A quantidade de filhos deve ser igual a 0 ou superior")
+    @NotBlank(message = "Campo requerido")
     private Integer children;
 
     public ClientDTO() {
